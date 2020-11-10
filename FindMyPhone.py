@@ -19,21 +19,24 @@ def getTarget():
 def discoverBluetoothDevice(target_name):
     # Starting bluetooth discovery
     print("[+] Starting Bluetooth Discovery")
-    nearby_devices = bluetooth.discover_devices()
+    nearby_devices = bluetooth.discover_devices(lookup_names=True)
     # Variable Declaration to None, will contain bdAddr at the end
     target_address = None
     iterateur = 1
-    for bdAddr in nearby_devices:
-        print("Devices #{0} : {1}" .format(iterateur, bdAddr))
-        if target_name == bluetooth.lookup_name(bdAddr):
+    for bdAddr, bdName in nearby_devices:
+        print("\n[+] Devices #{0} : {1}\n[+] With the name : {2}\n" .format(
+            iterateur, bdAddr, bdName))
+        if target_name == bdName:
             target_address = bdAddr
             break
+        iterateur += 1
 
     if target_address is not None:
-        print("Found bluetooth device with address : {0}" .format(
-            target_address))
+        print("[+] Found bluetooth device !")
+        print("[+] Name of the Device : {0}" .format(target_name))
+        print("[+] Address of the Device : {0}" .format(target_address))
     else:
-        print("The specified target is not in our range scope")
+        print("[-] The specified target is not in our range scope")
 
 
 def main():

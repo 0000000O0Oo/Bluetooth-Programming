@@ -36,17 +36,17 @@ def discoverBluetoothDevice(target_name):
     nearby_devices = bluetooth.discover_devices(lookup_names=True)
     # Variable Declaration to None, will contain bdAddr at the end
     target_address = None
-    iterateur = 1
+    iterator = 1
     fAddr = {}
     for bdAddr, bdName in nearby_devices:
         print("\n[+] Devices #{0} : {1}\n[+] With the name : {2}" .format(
-            iterateur, bdAddr, bdName))
+            iterator, bdAddr, bdName))
         fAddr["DeviceName"] = bdName
         fAddr["DeviceMac"] = bdAddr
         if target_name == bdName:
             target_address = bdAddr
             break
-        iterateur += 1
+        iterator += 1
 
     if target_address is not None:
         print("\n[+] Target Found ! : " + target_address)

@@ -3,6 +3,20 @@ import optparse
 # Not Needed yet => import subprocess
 
 
+def showBanner():
+    print(""" 
+    
+  ▄████  ██▀███  ▓█████  ███▄ ▄███▓ ██▓     ██▓ ███▄    █ 
+ ██▒ ▀█▒▓██ ▒ ██▒▓█   ▀ ▓██▒▀█▀ ██▒▓██▒    ▓██▒ ██ ▀█   █ 
+▒██░▄▄▄░▓██ ░▄█ ▒▒███   ▓██    ▓██░▒██░    ▒██▒▓██  ▀█ ██▒
+░▓█  ██▓▒██▀▀█▄  ▒▓█  ▄ ▒██    ▒██ ▒██░    ░██░▓██▒  ▐▌██▒
+░▒▓███▀▒░██▓ ▒██▒░▒████▒▒██▒   ░██▒░██████▒░██░▒██░   ▓██░
+ ░▒   ▒ ░ ▒▓ ░▒▓░░░ ▒░ ░░ ▒░   ░  ░░ ▒░▓  ░░▓  ░ ▒░   ▒ ▒ 
+  ░   ░   ░▒ ░ ▒░ ░ ░  ░░  ░      ░░ ░ ▒  ░ ▒ ░░ ░░   ░ ▒░
+░ ░   ░   ░░   ░    ░   ░      ░     ░ ░    ▒ ░   ░   ░ ░ 
+      ░    ░        ░  ░       ░       ░  ░ ░           ░ \n""")
+
+
 def getTarget():
     pOptions = optparse.OptionParser()
     pOptions.add_option("-t", "--target", dest="target_name",
@@ -25,7 +39,7 @@ def discoverBluetoothDevice(target_name):
     iterateur = 1
     fAddr = {}
     for bdAddr, bdName in nearby_devices:
-        print("\n[+] Devices #{0} : {1}\n[+] With the name : {2}\n" .format(
+        print("\n[+] Devices #{0} : {1}\n[+] With the name : {2}" .format(
             iterateur, bdAddr, bdName))
         fAddr["DeviceName"] = bdName
         fAddr["DeviceMac"] = bdAddr
@@ -35,11 +49,11 @@ def discoverBluetoothDevice(target_name):
         iterateur += 1
 
     if target_address is not None:
-        print("[+] Target Found ! : " + target_address)
+        print("\n[+] Target Found ! : " + target_address)
         print("[+] Name of the Device : {0}" .format(target_name))
         print("[+] Address of the Device : {0}" .format(target_address))
         print("[+] Gathering Device Service Infos...")
-        sList = bluetooth.find_service(name=target_name, , address=target_address)
+        # sList = bluetooth.find_service(name=target_name, , address=target_address)
         # if len(services) <= 0:
         #    print("[+] No services found on the target device !")
         # else:
@@ -50,6 +64,7 @@ def discoverBluetoothDevice(target_name):
 
 
 def main():
+    showBanner()
     print("[+] Getting Target")
     target = getTarget()
     print("[+] Current Target : {0}".format(target.target_name))

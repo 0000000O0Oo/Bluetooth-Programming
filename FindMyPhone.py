@@ -23,18 +23,28 @@ def discoverBluetoothDevice(target_name):
     # Variable Declaration to None, will contain bdAddr at the end
     target_address = None
     iterateur = 1
+    fAddr = {}
     for bdAddr, bdName in nearby_devices:
         print("\n[+] Devices #{0} : {1}\n[+] With the name : {2}\n" .format(
             iterateur, bdAddr, bdName))
+        fAddr["DeviceName"] = bdName
+        fAddr["DeviceMac"] = bdAddr
         if target_name == bdName:
             target_address = bdAddr
             break
         iterateur += 1
 
     if target_address is not None:
-        print("[+] Found bluetooth device !")
+        print("[+] Target Found ! : " + target_address)
         print("[+] Name of the Device : {0}" .format(target_name))
         print("[+] Address of the Device : {0}" .format(target_address))
+        print("[+] Gathering Device Service Infos...")
+        sList = bluetooth.find_service(name=target_name, , address=target_address)
+        # if len(services) <= 0:
+        #    print("[+] No services found on the target device !")
+        # else:
+        #    for sServ in services:
+        #        print("sServ :", sServ)
     else:
         print("[-] The specified target is not in our range scope")
 

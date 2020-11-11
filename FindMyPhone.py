@@ -52,7 +52,7 @@ def discoverBluetoothDevice(target_name):
         print("\n[+] Target Found ! : " + target_address)
         print("[+] Name of the Device : {0}" .format(target_name))
         print("[+] Address of the Device : {0}" .format(target_address))
-        print("[+] Gathering Device Service Infos...")
+        # print("[+] Gathering Device Service Infos...")
         # sList = bluetooth.find_service(name=target_name, , address=target_address)
         # if len(services) <= 0:
         #    print("[+] No services found on the target device !")
